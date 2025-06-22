@@ -34,12 +34,10 @@ function PaysListContent({ clientId }: Props) {
 	const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 	const trpc = useTRPC();
 	const query = useSuspenseInfiniteQuery(
-		trpc.payments.findManyByClient.infiniteQueryOptions(
+		trpc.clients.findManyPayments.infiniteQueryOptions(
 			{
-				search: {
-					limit: 10,
-					clientId,
-				},
+				limit: 10,
+				clientId,
 				cursor: {
 					lastId: null,
 					createdAt: null,

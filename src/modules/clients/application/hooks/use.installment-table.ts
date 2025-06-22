@@ -10,9 +10,7 @@ interface Props {
 export function useInstallmentTable({ clientId }: Props) {
 	const trpc = useTRPC();
 	const query = useSuspenseQuery(
-		trpc.installments.findAllByClient.queryOptions({
-			clientId,
-		}),
+		trpc.clients.findManyInstallments.queryOptions(clientId),
 	);
 
 	const table = useReactTable({

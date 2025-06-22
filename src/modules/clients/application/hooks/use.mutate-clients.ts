@@ -11,7 +11,7 @@ export function useMutateClients() {
 	const { refreshClientPageData } = useRefreshClientData();
 
 	const create = useMutation(
-		trpc.clients.create.mutationOptions({
+		trpc.clients.createClient.mutationOptions({
 			onMutate: () => {
 				toast.loading("Creando cliente", {
 					position: "top-center",
@@ -39,7 +39,7 @@ export function useMutateClients() {
 	);
 
 	const update = useMutation(
-		trpc.clients.update.mutationOptions({
+		trpc.clients.updateClient.mutationOptions({
 			onMutate: () => {
 				toast.loading("Actualizando cliente", {
 					position: "top-center",

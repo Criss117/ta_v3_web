@@ -8,10 +8,8 @@ export function useCategories() {
 	const query = useInfiniteQuery(
 		trpc.categories.findMany.infiniteQueryOptions(
 			{
-				search: {
-					limit: 20,
-					searchQuery,
-				},
+				limit: 20,
+				searchQuery,
 				cursor: {
 					lastId: null,
 					createdAt: null,

@@ -40,15 +40,13 @@ export function useRefreshClientData() {
 
 		if (refetchQueries.includes("installments")) {
 			queryClient.invalidateQueries(
-				trpc.installments.findAllByClient.queryOptions({
-					clientId,
-				}),
+				trpc.clients.findManyInstallments.queryOptions(clientId),
 			);
 		}
 
 		if (refetchQueries.includes("payments")) {
 			queryClient.invalidateQueries(
-				trpc.payments.findManyByClient.infiniteQueryFilter(),
+				trpc.clients.findManyPayments.infiniteQueryFilter(),
 			);
 		}
 	};

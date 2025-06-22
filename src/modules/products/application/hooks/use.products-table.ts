@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
 import { useTRPC } from "@/integrations/trpc";
 import { columns } from "@/modules/products/presentation/components/products-table/columns";
@@ -9,15 +9,14 @@ interface Props {
 }
 
 export function useProductsTable({ searchQuery }: Props) {
-	const [limit, setLimit] = useState(20);
+	console.log({ searchQuery });
 	const trpc = useTRPC();
 	const query = useSuspenseInfiniteQuery(
 		trpc.products.findMany.infiniteQueryOptions(
 			{
-				search: {
-					limit,
-					searchQuery,
-				},
+				limit: 20,
+				searchQuery: searchQuery ?? null,
+
 				cursor: {
 					lastId: null,
 					createdAt: null,
@@ -41,7 +40,7 @@ export function useProductsTable({ searchQuery }: Props) {
 		hasNextPage: query.hasNextPage,
 		isFetching: query.isFetching,
 		fetchNextPage: query.fetchNextPage,
-		pageSize: limit,
+		pageSize: 20,
 	});
 
 	return {

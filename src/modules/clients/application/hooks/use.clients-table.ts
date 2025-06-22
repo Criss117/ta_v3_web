@@ -13,10 +13,8 @@ export function useClientsTable({ searchQuery }: Props) {
 	const query = useSuspenseInfiniteQuery(
 		trpc.clients.findMany.infiniteQueryOptions(
 			{
-				search: {
-					limit: 20,
-					searchQuery,
-				},
+				limit: 20,
+				searchQuery,
 				cursor: {
 					lastClientCode: null,
 					createdAt: null,

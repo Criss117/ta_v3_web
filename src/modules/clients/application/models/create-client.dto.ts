@@ -1,4 +1,3 @@
-import { installmentModality } from "@/modules/sales/application/models/schemas";
 import { z } from "zod";
 
 export const createClientDto = z.object({

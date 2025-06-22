@@ -8,7 +8,7 @@ export function useMutatePayments() {
 	const { refreshClientPageData } = useRefreshClientData();
 
 	const create = useMutation(
-		trpc.payments.payDebt.mutationOptions({
+		trpc.clients.payDebt.mutationOptions({
 			onMutate: () => {
 				toast.loading("Creando pago...", {
 					id: "pay-debt-mutation",
@@ -29,7 +29,7 @@ export function useMutatePayments() {
 	);
 
 	const deletePayments = useMutation(
-		trpc.payments.deletePayments.mutationOptions({
+		trpc.clients.deleteManyPayments.mutationOptions({
 			onMutate: ({ ids }) => {
 				toast.loading(`Eliminando ${ids.length} pagos`, {
 					id: "delete-payments",
