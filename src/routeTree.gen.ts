@@ -8,196 +8,78 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-// Import Routes
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as privateDashboardRouteImport } from './routes/(private)/dashboard'
+import { Route as AuthSignUpIndexRouteImport } from './routes/auth/sign-up/index'
+import { Route as AuthSignInIndexRouteImport } from './routes/auth/sign-in/index'
+import { Route as privateSalesIndexRouteImport } from './routes/(private)/sales/index'
+import { Route as privateDashboardIndexRouteImport } from './routes/(private)/dashboard/index'
+import { Route as privateDashboardSalesRouteImport } from './routes/(private)/dashboard/sales'
+import { Route as privateDashboardProductsRouteImport } from './routes/(private)/dashboard/products'
+import { Route as privateDashboardAnalyticsRouteImport } from './routes/(private)/dashboard/analytics'
+import { Route as privateDashboardClientsIndexRouteImport } from './routes/(private)/dashboard/clients/index'
+import { Route as privateDashboardClientsIdRouteImport } from './routes/(private)/dashboard/clients/$id'
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as IndexImport } from './routes/index'
-import { Route as privateDashboardImport } from './routes/(private)/dashboard'
-import { Route as AuthSignUpIndexImport } from './routes/auth/sign-up/index'
-import { Route as AuthSignInIndexImport } from './routes/auth/sign-in/index'
-import { Route as privateSalesIndexImport } from './routes/(private)/sales/index'
-import { Route as privateDashboardIndexImport } from './routes/(private)/dashboard/index'
-import { Route as privateDashboardSalesImport } from './routes/(private)/dashboard/sales'
-import { Route as privateDashboardProductsImport } from './routes/(private)/dashboard/products'
-import { Route as privateDashboardAnalyticsImport } from './routes/(private)/dashboard/analytics'
-import { Route as privateDashboardClientsIndexImport } from './routes/(private)/dashboard/clients/index'
-import { Route as privateDashboardClientsIdImport } from './routes/(private)/dashboard/clients/$id'
-
-// Create/Update Routes
-
-const IndexRoute = IndexImport.update({
+const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const privateDashboardRoute = privateDashboardImport.update({
+const privateDashboardRoute = privateDashboardRouteImport.update({
   id: '/(private)/dashboard',
   path: '/dashboard',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AuthSignUpIndexRoute = AuthSignUpIndexImport.update({
+const AuthSignUpIndexRoute = AuthSignUpIndexRouteImport.update({
   id: '/auth/sign-up/',
   path: '/auth/sign-up/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AuthSignInIndexRoute = AuthSignInIndexImport.update({
+const AuthSignInIndexRoute = AuthSignInIndexRouteImport.update({
   id: '/auth/sign-in/',
   path: '/auth/sign-in/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const privateSalesIndexRoute = privateSalesIndexImport.update({
+const privateSalesIndexRoute = privateSalesIndexRouteImport.update({
   id: '/(private)/sales/',
   path: '/sales/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const privateDashboardIndexRoute = privateDashboardIndexImport.update({
+const privateDashboardIndexRoute = privateDashboardIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => privateDashboardRoute,
 } as any)
-
-const privateDashboardSalesRoute = privateDashboardSalesImport.update({
+const privateDashboardSalesRoute = privateDashboardSalesRouteImport.update({
   id: '/sales',
   path: '/sales',
   getParentRoute: () => privateDashboardRoute,
 } as any)
-
-const privateDashboardProductsRoute = privateDashboardProductsImport.update({
-  id: '/products',
-  path: '/products',
-  getParentRoute: () => privateDashboardRoute,
-} as any)
-
-const privateDashboardAnalyticsRoute = privateDashboardAnalyticsImport.update({
-  id: '/analytics',
-  path: '/analytics',
-  getParentRoute: () => privateDashboardRoute,
-} as any)
-
+const privateDashboardProductsRoute =
+  privateDashboardProductsRouteImport.update({
+    id: '/products',
+    path: '/products',
+    getParentRoute: () => privateDashboardRoute,
+  } as any)
+const privateDashboardAnalyticsRoute =
+  privateDashboardAnalyticsRouteImport.update({
+    id: '/analytics',
+    path: '/analytics',
+    getParentRoute: () => privateDashboardRoute,
+  } as any)
 const privateDashboardClientsIndexRoute =
-  privateDashboardClientsIndexImport.update({
+  privateDashboardClientsIndexRouteImport.update({
     id: '/clients/',
     path: '/clients/',
     getParentRoute: () => privateDashboardRoute,
   } as any)
-
-const privateDashboardClientsIdRoute = privateDashboardClientsIdImport.update({
-  id: '/clients/$id',
-  path: '/clients/$id',
-  getParentRoute: () => privateDashboardRoute,
-} as any)
-
-// Populate the FileRoutesByPath interface
-
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/(private)/dashboard': {
-      id: '/(private)/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof privateDashboardImport
-      parentRoute: typeof rootRoute
-    }
-    '/(private)/dashboard/analytics': {
-      id: '/(private)/dashboard/analytics'
-      path: '/analytics'
-      fullPath: '/dashboard/analytics'
-      preLoaderRoute: typeof privateDashboardAnalyticsImport
-      parentRoute: typeof privateDashboardImport
-    }
-    '/(private)/dashboard/products': {
-      id: '/(private)/dashboard/products'
-      path: '/products'
-      fullPath: '/dashboard/products'
-      preLoaderRoute: typeof privateDashboardProductsImport
-      parentRoute: typeof privateDashboardImport
-    }
-    '/(private)/dashboard/sales': {
-      id: '/(private)/dashboard/sales'
-      path: '/sales'
-      fullPath: '/dashboard/sales'
-      preLoaderRoute: typeof privateDashboardSalesImport
-      parentRoute: typeof privateDashboardImport
-    }
-    '/(private)/dashboard/': {
-      id: '/(private)/dashboard/'
-      path: '/'
-      fullPath: '/dashboard/'
-      preLoaderRoute: typeof privateDashboardIndexImport
-      parentRoute: typeof privateDashboardImport
-    }
-    '/(private)/sales/': {
-      id: '/(private)/sales/'
-      path: '/sales'
-      fullPath: '/sales'
-      preLoaderRoute: typeof privateSalesIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/auth/sign-in/': {
-      id: '/auth/sign-in/'
-      path: '/auth/sign-in'
-      fullPath: '/auth/sign-in'
-      preLoaderRoute: typeof AuthSignInIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/auth/sign-up/': {
-      id: '/auth/sign-up/'
-      path: '/auth/sign-up'
-      fullPath: '/auth/sign-up'
-      preLoaderRoute: typeof AuthSignUpIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/(private)/dashboard/clients/$id': {
-      id: '/(private)/dashboard/clients/$id'
-      path: '/clients/$id'
-      fullPath: '/dashboard/clients/$id'
-      preLoaderRoute: typeof privateDashboardClientsIdImport
-      parentRoute: typeof privateDashboardImport
-    }
-    '/(private)/dashboard/clients/': {
-      id: '/(private)/dashboard/clients/'
-      path: '/clients'
-      fullPath: '/dashboard/clients'
-      preLoaderRoute: typeof privateDashboardClientsIndexImport
-      parentRoute: typeof privateDashboardImport
-    }
-  }
-}
-
-// Create and export the route tree
-
-interface privateDashboardRouteChildren {
-  privateDashboardAnalyticsRoute: typeof privateDashboardAnalyticsRoute
-  privateDashboardProductsRoute: typeof privateDashboardProductsRoute
-  privateDashboardSalesRoute: typeof privateDashboardSalesRoute
-  privateDashboardIndexRoute: typeof privateDashboardIndexRoute
-  privateDashboardClientsIdRoute: typeof privateDashboardClientsIdRoute
-  privateDashboardClientsIndexRoute: typeof privateDashboardClientsIndexRoute
-}
-
-const privateDashboardRouteChildren: privateDashboardRouteChildren = {
-  privateDashboardAnalyticsRoute: privateDashboardAnalyticsRoute,
-  privateDashboardProductsRoute: privateDashboardProductsRoute,
-  privateDashboardSalesRoute: privateDashboardSalesRoute,
-  privateDashboardIndexRoute: privateDashboardIndexRoute,
-  privateDashboardClientsIdRoute: privateDashboardClientsIdRoute,
-  privateDashboardClientsIndexRoute: privateDashboardClientsIndexRoute,
-}
-
-const privateDashboardRouteWithChildren =
-  privateDashboardRoute._addFileChildren(privateDashboardRouteChildren)
+const privateDashboardClientsIdRoute =
+  privateDashboardClientsIdRouteImport.update({
+    id: '/clients/$id',
+    path: '/clients/$id',
+    getParentRoute: () => privateDashboardRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -212,7 +94,6 @@ export interface FileRoutesByFullPath {
   '/dashboard/clients/$id': typeof privateDashboardClientsIdRoute
   '/dashboard/clients': typeof privateDashboardClientsIndexRoute
 }
-
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard/analytics': typeof privateDashboardAnalyticsRoute
@@ -225,9 +106,8 @@ export interface FileRoutesByTo {
   '/dashboard/clients/$id': typeof privateDashboardClientsIdRoute
   '/dashboard/clients': typeof privateDashboardClientsIndexRoute
 }
-
 export interface FileRoutesById {
-  __root__: typeof rootRoute
+  __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/(private)/dashboard': typeof privateDashboardRouteWithChildren
   '/(private)/dashboard/analytics': typeof privateDashboardAnalyticsRoute
@@ -240,7 +120,6 @@ export interface FileRoutesById {
   '/(private)/dashboard/clients/$id': typeof privateDashboardClientsIdRoute
   '/(private)/dashboard/clients/': typeof privateDashboardClientsIndexRoute
 }
-
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
@@ -282,7 +161,6 @@ export interface FileRouteTypes {
     | '/(private)/dashboard/clients/'
   fileRoutesById: FileRoutesById
 }
-
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   privateDashboardRoute: typeof privateDashboardRouteWithChildren
@@ -291,6 +169,109 @@ export interface RootRouteChildren {
   AuthSignUpIndexRoute: typeof AuthSignUpIndexRoute
 }
 
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(private)/dashboard': {
+      id: '/(private)/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof privateDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/sign-up/': {
+      id: '/auth/sign-up/'
+      path: '/auth/sign-up'
+      fullPath: '/auth/sign-up'
+      preLoaderRoute: typeof AuthSignUpIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/sign-in/': {
+      id: '/auth/sign-in/'
+      path: '/auth/sign-in'
+      fullPath: '/auth/sign-in'
+      preLoaderRoute: typeof AuthSignInIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(private)/sales/': {
+      id: '/(private)/sales/'
+      path: '/sales'
+      fullPath: '/sales'
+      preLoaderRoute: typeof privateSalesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(private)/dashboard/': {
+      id: '/(private)/dashboard/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof privateDashboardIndexRouteImport
+      parentRoute: typeof privateDashboardRoute
+    }
+    '/(private)/dashboard/sales': {
+      id: '/(private)/dashboard/sales'
+      path: '/sales'
+      fullPath: '/dashboard/sales'
+      preLoaderRoute: typeof privateDashboardSalesRouteImport
+      parentRoute: typeof privateDashboardRoute
+    }
+    '/(private)/dashboard/products': {
+      id: '/(private)/dashboard/products'
+      path: '/products'
+      fullPath: '/dashboard/products'
+      preLoaderRoute: typeof privateDashboardProductsRouteImport
+      parentRoute: typeof privateDashboardRoute
+    }
+    '/(private)/dashboard/analytics': {
+      id: '/(private)/dashboard/analytics'
+      path: '/analytics'
+      fullPath: '/dashboard/analytics'
+      preLoaderRoute: typeof privateDashboardAnalyticsRouteImport
+      parentRoute: typeof privateDashboardRoute
+    }
+    '/(private)/dashboard/clients/': {
+      id: '/(private)/dashboard/clients/'
+      path: '/clients'
+      fullPath: '/dashboard/clients'
+      preLoaderRoute: typeof privateDashboardClientsIndexRouteImport
+      parentRoute: typeof privateDashboardRoute
+    }
+    '/(private)/dashboard/clients/$id': {
+      id: '/(private)/dashboard/clients/$id'
+      path: '/clients/$id'
+      fullPath: '/dashboard/clients/$id'
+      preLoaderRoute: typeof privateDashboardClientsIdRouteImport
+      parentRoute: typeof privateDashboardRoute
+    }
+  }
+}
+
+interface privateDashboardRouteChildren {
+  privateDashboardAnalyticsRoute: typeof privateDashboardAnalyticsRoute
+  privateDashboardProductsRoute: typeof privateDashboardProductsRoute
+  privateDashboardSalesRoute: typeof privateDashboardSalesRoute
+  privateDashboardIndexRoute: typeof privateDashboardIndexRoute
+  privateDashboardClientsIdRoute: typeof privateDashboardClientsIdRoute
+  privateDashboardClientsIndexRoute: typeof privateDashboardClientsIndexRoute
+}
+
+const privateDashboardRouteChildren: privateDashboardRouteChildren = {
+  privateDashboardAnalyticsRoute: privateDashboardAnalyticsRoute,
+  privateDashboardProductsRoute: privateDashboardProductsRoute,
+  privateDashboardSalesRoute: privateDashboardSalesRoute,
+  privateDashboardIndexRoute: privateDashboardIndexRoute,
+  privateDashboardClientsIdRoute: privateDashboardClientsIdRoute,
+  privateDashboardClientsIndexRoute: privateDashboardClientsIndexRoute,
+}
+
+const privateDashboardRouteWithChildren =
+  privateDashboardRoute._addFileChildren(privateDashboardRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   privateDashboardRoute: privateDashboardRouteWithChildren,
@@ -298,71 +279,6 @@ const rootRouteChildren: RootRouteChildren = {
   AuthSignInIndexRoute: AuthSignInIndexRoute,
   AuthSignUpIndexRoute: AuthSignUpIndexRoute,
 }
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/",
-        "/(private)/dashboard",
-        "/(private)/sales/",
-        "/auth/sign-in/",
-        "/auth/sign-up/"
-      ]
-    },
-    "/": {
-      "filePath": "index.tsx"
-    },
-    "/(private)/dashboard": {
-      "filePath": "(private)/dashboard.tsx",
-      "children": [
-        "/(private)/dashboard/analytics",
-        "/(private)/dashboard/products",
-        "/(private)/dashboard/sales",
-        "/(private)/dashboard/",
-        "/(private)/dashboard/clients/$id",
-        "/(private)/dashboard/clients/"
-      ]
-    },
-    "/(private)/dashboard/analytics": {
-      "filePath": "(private)/dashboard/analytics.tsx",
-      "parent": "/(private)/dashboard"
-    },
-    "/(private)/dashboard/products": {
-      "filePath": "(private)/dashboard/products.tsx",
-      "parent": "/(private)/dashboard"
-    },
-    "/(private)/dashboard/sales": {
-      "filePath": "(private)/dashboard/sales.tsx",
-      "parent": "/(private)/dashboard"
-    },
-    "/(private)/dashboard/": {
-      "filePath": "(private)/dashboard/index.tsx",
-      "parent": "/(private)/dashboard"
-    },
-    "/(private)/sales/": {
-      "filePath": "(private)/sales/index.tsx"
-    },
-    "/auth/sign-in/": {
-      "filePath": "auth/sign-in/index.tsx"
-    },
-    "/auth/sign-up/": {
-      "filePath": "auth/sign-up/index.tsx"
-    },
-    "/(private)/dashboard/clients/$id": {
-      "filePath": "(private)/dashboard/clients/$id.tsx",
-      "parent": "/(private)/dashboard"
-    },
-    "/(private)/dashboard/clients/": {
-      "filePath": "(private)/dashboard/clients/index.tsx",
-      "parent": "/(private)/dashboard"
-    }
-  }
-}
-ROUTE_MANIFEST_END */

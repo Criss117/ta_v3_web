@@ -8,7 +8,6 @@ import {
 } from "../ui/sidebar";
 import { Link } from "@tanstack/react-router";
 import { SidebarContent } from "./content";
-import { SidebarFooter } from "./footer";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 	return (
@@ -29,7 +28,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 				</SidebarMenu>
 			</SidebarHeader>
 			<SidebarContent />
-			{/* <SidebarFooter /> */}
 		</Sidebar>
 	);
 }

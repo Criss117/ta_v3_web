@@ -1,23 +1,9 @@
 import { Link } from "@tanstack/react-router";
-import { LoaderIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import {
-	Form,
-	FormControl,
-	FormField,
-	FormItem,
-	FormLabel,
-	FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { useSignInForm } from "@/modules/auth/application/hooks/use.sign-in-form";
 
 export function SignInFormSection() {
-	const form = useSignInForm();
-
 	return (
 		<>
-			<Form {...form}>
+			{/* <Form {...form}>
 				<form onSubmit={form.onSubmit} className="space-y-6">
 					<FormField
 						control={form.control}
@@ -72,7 +58,7 @@ export function SignInFormSection() {
 						Crear cuenta
 					</Button>
 				</form>
-			</Form>
+			</Form> */}
 			<div className="text-center text-sm">
 				Don&apos;t have an account?{" "}
 				<Link to="/auth/sign-up" className="underline underline-offset-4">

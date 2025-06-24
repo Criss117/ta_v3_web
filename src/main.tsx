@@ -11,7 +11,6 @@ import { useTRPC } from "./integrations/trpc";
 const router = createRouter({
 	routeTree,
 	context: {
-		getUser: () => null,
 		queryClient: {} as ReturnType<typeof useQueryClient>,
 		trpc: {} as ReturnType<typeof useTRPC>,
 	},
