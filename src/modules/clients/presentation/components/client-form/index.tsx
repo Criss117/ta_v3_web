@@ -8,6 +8,7 @@ import { Form } from "@/components/ui/form";
 import { FormInput } from "@/components/form/form-input";
 import { Button } from "@/components/ui/button";
 import type { CompleteClient } from "@/modules/clients/application/models";
+import { SelectInput } from "@/components/form/select-input";
 
 interface Props {
 	isPending: boolean;
@@ -43,11 +44,18 @@ export function ClientForm({
 					address: client.address,
 					email: client.email,
 					phone: client.phone,
+					globalInstallmentModality: client.globalInstallmentModality,
+					globalNumberOfInstallments: client.globalNumberOfInstallments,
 				}
 			: {
 					fullName: "",
 					creditLimit: 0,
 					clientCode: "",
+					address: "",
+					email: "",
+					phone: "",
+					globalInstallmentModality: "monthly",
+					globalNumberOfInstallments: 1,
 				},
 	});
 
@@ -103,6 +111,20 @@ export function ClientForm({
 						type="number"
 						min={0}
 						required
+					/>
+					<SelectInput
+						control={form.control}
+						name="globalInstallmentModality"
+						label="Modalidad de cuotas"
+						placeholder="Modalidad de cuotas"
+						items={frecuencyItems}
+					/>
+					<SelectInput
+						control={form.control}
+						name="globalNumberOfInstallments"
+						label="Cantidad de coutoas"
+						placeholder="Cantidad de coutoas"
+						items={numOfInstallments}
 					/>
 				</fieldset>
 				<fieldset className="flex gap-x-2">

@@ -16,6 +16,8 @@ export const Route = createFileRoute("/(private)/dashboard")({
 			});
 		}
 
+		console.log(user);
+
 		return { user };
 	},
 	pendingComponent: () => <PageLoader />,

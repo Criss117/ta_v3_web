@@ -1,3 +1,4 @@
+import { installmentModality } from "@/modules/sales/application/models/schemas";
 import { z } from "zod";
 
 export const createClientDto = z.object({
@@ -42,6 +43,13 @@ export const createClientDto = z.object({
 		.max(100, {
 			message: "El código del cliente no puede superar los 100 caracteres.",
 		}),
+
+	globalNumberOfInstallments: z.coerce
+		.number({ required_error: "El número de cuotas es obligatorio." })
+		.int({ message: "El número de cuotas debe ser un número entero." })
+		.min(1, { message: "El número de cuotas debe ser al menos 1." }),
+
+	globalInstallmentModality: z.enum(installmentModality),
 });
 
 export type CreateClientDto = z.infer<typeof createClientDto>;

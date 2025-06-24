@@ -43,6 +43,7 @@
 		"@uidotdev/usehooks": "2.4.1",
 		"better-auth": "1.2.7",
 		"class-variance-authority": "0.7.1",
+		"client": ".",
 		"clsx": "2.1.1",
 		"cmdk": "1.1.1",
 		"lucide-react": "^0.513.0",

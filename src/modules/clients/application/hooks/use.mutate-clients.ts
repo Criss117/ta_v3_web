@@ -53,9 +53,9 @@ export function useMutateClients() {
 				});
 				refreshClientPageData(variables.clientId, ["client"]);
 			},
-			onError: () => {
+			onError: (err) => {
 				toast.dismiss("update-client");
-				toast.error("Error al actualizar cliente", { position: "top-center" });
+				toast.error(err.message, { position: "top-center" });
 			},
 		}),
 	);

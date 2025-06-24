@@ -1,10 +1,12 @@
 import { toast } from "sonner";
 import { useTRPC } from "@/integrations/trpc";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useTicketsStore } from "../store/tickets.store";
 
 export function useMutateTickets() {
 	const trpc = useTRPC();
 	const queryClient = useQueryClient();
+	const clearCurrentTicket = useTicketsStore((s) => s.clearCurrentTicket);
 
 	const create = useMutation(
 		trpc.tickets.create.mutationOptions({
@@ -31,6 +33,7 @@ export function useMutateTickets() {
 				toast.success("Ticket creado exitosamente", {
 					position: "top-center",
 				});
+				clearCurrentTicket();
 			},
 			onError: () => {
 				toast.dismiss("create-ticket");
