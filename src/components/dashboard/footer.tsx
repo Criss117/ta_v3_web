@@ -15,26 +15,9 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { useRouter } from "@tanstack/react-router";
-import { useAuth } from "@/modules/auth/application/store/auth.store";
 
 export function SidebarFooter() {
 	const { isMobile } = useSidebar();
-	const router = useRouter();
-	const user = useAuth((s) => s.user);
-	const signOut = useAuth((s) => s.signOut);
-
-	if (!user) {
-		return null;
-	}
-
-	const handleSignOut = async () => {
-		signOut();
-
-		router.navigate({
-			to: "/auth/sign-in",
-		});
-	};
 
 	return (
 		<SFooter>

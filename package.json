@@ -41,7 +41,6 @@
 		"@trpc/server": "11.1.2",
 		"@trpc/tanstack-react-query": "11.1.2",
 		"@uidotdev/usehooks": "2.4.1",
-		"better-auth": "1.2.7",
 		"class-variance-authority": "0.7.1",
 		"client": ".",
 		"clsx": "2.1.1",

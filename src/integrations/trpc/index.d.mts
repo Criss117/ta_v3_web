@@ -1,8 +1,7 @@
 import { z } from 'zod';
 import * as _libsql_client from '@libsql/client';
-import * as _trpc_server from '@trpc/server';
 import * as drizzle_orm_sqlite_core from 'drizzle-orm/sqlite-core';
-import * as _trpc_server_unstable_core_do_not_import from '@trpc/server/unstable-core-do-not-import';
+import * as _trpc_server from '@trpc/server';
 
 interface PaymentSummary {
     id: number;
@@ -258,17 +257,17 @@ declare const installmentPaymentSummaryDto: z.ZodObject<{
     dueDate: z.ZodEffects<z.ZodNumber, Date, number>;
     createdAt: z.ZodEffects<z.ZodNumber, Date, number>;
 }, "strip", z.ZodTypeAny, {
+    status: "unpaid" | "partial" | "paid";
     id: number;
     createdAt: Date;
-    status: "partial" | "unpaid" | "paid";
     subtotal: number;
     installmentNumber: number;
     dueDate: Date;
     subtotalPaid: number;
 }, {
+    status: "unpaid" | "partial" | "paid";
     id: number;
     createdAt: number;
-    status: "partial" | "unpaid" | "paid";
     subtotal: number;
     installmentNumber: number;
     dueDate: number;
@@ -344,36 +343,37 @@ type Product = typeof products.$inferSelect & {
     } | null;
 };
 
-declare const appRouter: _trpc_server_unstable_core_do_not_import.BuiltRouter<{
-    ctx: undefined;
+declare const appRouter: _trpc_server.TRPCBuiltRouter<{
+    ctx: object;
     meta: object;
-    errorShape: _trpc_server_unstable_core_do_not_import.DefaultErrorShape;
+    errorShape: _trpc_server.TRPCDefaultErrorShape;
     transformer: true;
-}, _trpc_server_unstable_core_do_not_import.DecorateCreateRouterOptions<{
-    products: _trpc_server_unstable_core_do_not_import.BuiltRouter<{
-        ctx: undefined;
+}, _trpc_server.TRPCDecorateCreateRouterOptions<{
+    products: _trpc_server.TRPCBuiltRouter<{
+        ctx: object;
         meta: object;
-        errorShape: _trpc_server_unstable_core_do_not_import.DefaultErrorShape;
+        errorShape: _trpc_server.TRPCDefaultErrorShape;
         transformer: true;
-    }, _trpc_server_unstable_core_do_not_import.DecorateCreateRouterOptions<{
+    }, _trpc_server.TRPCDecorateCreateRouterOptions<{
         findMany: _trpc_server.TRPCQueryProcedure<{
             input: {
                 limit: number;
-                searchQuery: string;
                 cursor: {
                     createdAt: Date | null;
                     lastId: number | null;
                 };
+                searchQuery?: string | null | undefined;
             };
             output: Paginated<Product, {
                 createdAt: Date | null;
                 lastId: number | null;
             }>;
+            meta: object;
         }>;
         create: _trpc_server.TRPCMutationProcedure<{
             input: {
-                description: string;
                 barcode: string;
+                description: string;
                 costPrice: number;
                 salePrice: number;
                 wholesalePrice: number;
@@ -382,12 +382,14 @@ declare const appRouter: _trpc_server_unstable_core_do_not_import.BuiltRouter<{
                 categoryId?: number | null | undefined;
             };
             output: void;
+            meta: object;
         }>;
         update: _trpc_server.TRPCMutationProcedure<{
             input: {
+                productId: number;
                 data: {
-                    description?: string | undefined;
                     barcode?: string | undefined;
+                    description?: string | undefined;
                     costPrice?: number | undefined;
                     salePrice?: number | undefined;
                     wholesalePrice?: number | undefined;
@@ -395,15 +397,16 @@ declare const appRouter: _trpc_server_unstable_core_do_not_import.BuiltRouter<{
                     minStock?: number | undefined;
                     categoryId?: number | null | undefined;
                 };
-                productId: number;
             };
             output: void;
+            meta: object;
         }>;
         delete: _trpc_server.TRPCMutationProcedure<{
             input: {
                 productId: number;
             };
             output: void;
+            meta: object;
         }>;
         findOneBy: _trpc_server.TRPCQueryProcedure<{
             input: {
@@ -429,22 +432,23 @@ declare const appRouter: _trpc_server_unstable_core_do_not_import.BuiltRouter<{
                 minStock: number;
                 categoryId: number | null;
             };
+            meta: object;
         }>;
     }>>;
-    categories: _trpc_server_unstable_core_do_not_import.BuiltRouter<{
-        ctx: undefined;
+    categories: _trpc_server.TRPCBuiltRouter<{
+        ctx: object;
         meta: object;
-        errorShape: _trpc_server_unstable_core_do_not_import.DefaultErrorShape;
+        errorShape: _trpc_server.TRPCDefaultErrorShape;
         transformer: true;
-    }, _trpc_server_unstable_core_do_not_import.DecorateCreateRouterOptions<{
+    }, _trpc_server.TRPCDecorateCreateRouterOptions<{
         findMany: _trpc_server.TRPCQueryProcedure<{
             input: {
                 limit: number;
-                searchQuery: string;
                 cursor: {
                     createdAt: Date | null;
                     lastId: number | null;
                 };
+                searchQuery?: string | null | undefined;
             };
             output: {
                 items: Category[];
@@ -453,6 +457,7 @@ declare const appRouter: _trpc_server_unstable_core_do_not_import.BuiltRouter<{
                     lastId: number | null;
                 };
             };
+            meta: object;
         }>;
         create: _trpc_server.TRPCMutationProcedure<{
             input: {
@@ -460,43 +465,47 @@ declare const appRouter: _trpc_server_unstable_core_do_not_import.BuiltRouter<{
                 description?: string | null | undefined;
             };
             output: _libsql_client.ResultSet;
+            meta: object;
         }>;
     }>>;
-    clients: _trpc_server_unstable_core_do_not_import.BuiltRouter<{
-        ctx: undefined;
+    clients: _trpc_server.TRPCBuiltRouter<{
+        ctx: object;
         meta: object;
-        errorShape: _trpc_server_unstable_core_do_not_import.DefaultErrorShape;
+        errorShape: _trpc_server.TRPCDefaultErrorShape;
         transformer: true;
-    }, _trpc_server_unstable_core_do_not_import.DecorateCreateRouterOptions<{
+    }, _trpc_server.TRPCDecorateCreateRouterOptions<{
         findMany: _trpc_server.TRPCQueryProcedure<{
             input: {
                 limit: number;
-                searchQuery: string;
                 cursor: {
                     createdAt?: Date | null | undefined;
                     lastClientCode?: string | null | undefined;
                 };
+                searchQuery?: string | null | undefined;
             };
             output: Paginated<ClientSummary, {
                 createdAt?: Date | null | undefined;
                 lastClientCode?: string | null | undefined;
             }>;
+            meta: object;
         }>;
         findOneBy: _trpc_server.TRPCQueryProcedure<{
             input: {
-                clientId?: string | null | undefined;
                 clientCode?: string | null | undefined;
+                clientId?: string | null | undefined;
             };
             output: ClientDetail;
+            meta: object;
         }>;
         findManyInstallments: _trpc_server.TRPCQueryProcedure<{
             input: string;
             output: InstallmentDetail[];
+            meta: object;
         }>;
         findManyPayments: _trpc_server.TRPCQueryProcedure<{
             input: {
-                limit: number;
                 clientId: string;
+                limit: number;
                 cursor: {
                     createdAt: Date | null;
                     lastId: number | null;
@@ -506,12 +515,15 @@ declare const appRouter: _trpc_server_unstable_core_do_not_import.BuiltRouter<{
                 createdAt: Date | null;
                 lastId: number | null;
             }>;
+            meta: object;
         }>;
         createClient: _trpc_server.TRPCMutationProcedure<{
             input: {
                 fullName: string;
                 creditLimit: number;
                 clientCode: string;
+                globalNumberOfInstallments: number;
+                globalInstallmentModality: "weekly" | "monthly" | "biweekly";
                 email?: string | null | undefined;
                 phone?: string | null | undefined;
                 address?: string | null | undefined;
@@ -519,20 +531,24 @@ declare const appRouter: _trpc_server_unstable_core_do_not_import.BuiltRouter<{
             output: {
                 id: string;
             };
+            meta: object;
         }>;
         updateClient: _trpc_server.TRPCMutationProcedure<{
             input: {
                 clientId: string;
-                email?: string | null | undefined;
                 fullName?: string | undefined;
+                email?: string | null | undefined;
                 phone?: string | null | undefined;
                 address?: string | null | undefined;
                 creditLimit?: number | undefined;
                 clientCode?: string | undefined;
+                globalNumberOfInstallments?: number | undefined;
+                globalInstallmentModality?: "weekly" | "monthly" | "biweekly" | undefined;
                 numberOfInstallments?: number | null | undefined;
                 modality?: "weekly" | "monthly" | "biweekly" | null | undefined;
             };
-            output: ResultSet;
+            output: _libsql_client.ResultSet;
+            meta: object;
         }>;
         payDebt: _trpc_server.TRPCMutationProcedure<{
             input: {
@@ -541,21 +557,23 @@ declare const appRouter: _trpc_server_unstable_core_do_not_import.BuiltRouter<{
                 amount?: number | null | undefined;
             };
             output: void;
+            meta: object;
         }>;
         deleteManyPayments: _trpc_server.TRPCMutationProcedure<{
             input: {
                 clientId: string;
                 ids: number[];
             };
-            output: any;
+            output: [void, _libsql_client.ResultSet, void];
+            meta: object;
         }>;
     }>>;
-    tickets: _trpc_server_unstable_core_do_not_import.BuiltRouter<{
-        ctx: undefined;
+    tickets: _trpc_server.TRPCBuiltRouter<{
+        ctx: object;
         meta: object;
-        errorShape: _trpc_server_unstable_core_do_not_import.DefaultErrorShape;
+        errorShape: _trpc_server.TRPCDefaultErrorShape;
         transformer: true;
-    }, _trpc_server_unstable_core_do_not_import.DecorateCreateRouterOptions<{
+    }, _trpc_server.TRPCDecorateCreateRouterOptions<{
         create: _trpc_server.TRPCMutationProcedure<{
             input: {
                 payType: "cash" | "credit";
@@ -568,6 +586,7 @@ declare const appRouter: _trpc_server_unstable_core_do_not_import.BuiltRouter<{
                 clientId?: string | null | undefined;
             };
             output: void;
+            meta: object;
         }>;
         findManyByClient: _trpc_server.TRPCQueryProcedure<{
             input: {
@@ -575,9 +594,9 @@ declare const appRouter: _trpc_server_unstable_core_do_not_import.BuiltRouter<{
             };
             output: {
                 items: {
-                    id: number;
                     description: string;
                     productId: number;
+                    id: number;
                     quantity: number;
                     subtotal: number;
                 }[];
@@ -589,21 +608,24 @@ declare const appRouter: _trpc_server_unstable_core_do_not_import.BuiltRouter<{
                 clientId: string | null;
                 total: number;
                 totalPaid: number;
-                status: "partial" | "unpaid" | "paid";
+                status: "unpaid" | "partial" | "paid";
                 payType: "cash" | "credit" | null;
             }[];
+            meta: object;
         }>;
         delete: _trpc_server.TRPCMutationProcedure<{
             input: {
                 clientId: string;
                 ticketId: number;
             };
-            output: any;
+            output: [_libsql_client.ResultSet, void];
+            meta: object;
         }>;
     }>>;
     greets: _trpc_server.TRPCQueryProcedure<{
         input: void;
         output: string;
+        meta: object;
     }>;
 }>>;
 type AppRouter = typeof appRouter;

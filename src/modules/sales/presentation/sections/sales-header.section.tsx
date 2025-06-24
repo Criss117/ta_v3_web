@@ -1,4 +1,4 @@
-import { Link, useRouter } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { LogOut, LayoutDashboardIcon } from "lucide-react";
 import { dashboardLinks } from "@/components/dashboard/content";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -12,25 +12,8 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useAuth } from "@/modules/auth/application/store/auth.store";
 
 export function SalesHeaderSection() {
-	const user = useAuth((s) => s.user);
-	const signOut = useAuth((s) => s.signOut);
-	const router = useRouter();
-
-	if (!user) {
-		return null;
-	}
-
-	const handleSignOut = async () => {
-		signOut();
-
-		router.navigate({
-			to: "/auth/sign-in",
-		});
-	};
-
 	return (
 		<header className="h-20 flex items-center px-20 justify-between fixed w-full z-30 bg-background">
 			<h1 className="text-3xl font-bold">Ventas</h1>
@@ -58,8 +41,8 @@ export function SalesHeaderSection() {
 									<AvatarFallback className="rounded-lg">CN</AvatarFallback>
 								</Avatar>
 								<div className="grid flex-1 text-left text-sm leading-tight">
-									<span className="truncate font-semibold">{user.name}</span>
-									<span className="truncate text-xs">{user.email}</span>
+									<span className="truncate font-semibold">Cristian</span>
+									<span className="truncate text-xs">Viveros</span>
 								</div>
 							</div>
 						</DropdownMenuLabel>
@@ -75,7 +58,7 @@ export function SalesHeaderSection() {
 							))}
 						</DropdownMenuGroup>
 						<DropdownMenuSeparator />
-						<DropdownMenuItem onClick={handleSignOut}>
+						<DropdownMenuItem>
 							<LogOut />
 							Cerrar sesión
 						</DropdownMenuItem>
