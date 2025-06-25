@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ErrorRouteImport } from './routes/error'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as privateDashboardRouteImport } from './routes/(private)/dashboard'
 import { Route as AuthSignUpIndexRouteImport } from './routes/auth/sign-up/index'
@@ -21,6 +22,11 @@ import { Route as privateDashboardAnalyticsRouteImport } from './routes/(private
 import { Route as privateDashboardClientsIndexRouteImport } from './routes/(private)/dashboard/clients/index'
 import { Route as privateDashboardClientsIdRouteImport } from './routes/(private)/dashboard/clients/$id'
 
+const ErrorRoute = ErrorRouteImport.update({
+  id: '/error',
+  path: '/error',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -83,6 +89,7 @@ const privateDashboardClientsIdRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/error': typeof ErrorRoute
   '/dashboard': typeof privateDashboardRouteWithChildren
   '/dashboard/analytics': typeof privateDashboardAnalyticsRoute
   '/dashboard/products': typeof privateDashboardProductsRoute
@@ -96,6 +103,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/error': typeof ErrorRoute
   '/dashboard/analytics': typeof privateDashboardAnalyticsRoute
   '/dashboard/products': typeof privateDashboardProductsRoute
   '/dashboard/sales': typeof privateDashboardSalesRoute
@@ -109,6 +117,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/error': typeof ErrorRoute
   '/(private)/dashboard': typeof privateDashboardRouteWithChildren
   '/(private)/dashboard/analytics': typeof privateDashboardAnalyticsRoute
   '/(private)/dashboard/products': typeof privateDashboardProductsRoute
@@ -124,6 +133,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/error'
     | '/dashboard'
     | '/dashboard/analytics'
     | '/dashboard/products'
@@ -137,6 +147,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/error'
     | '/dashboard/analytics'
     | '/dashboard/products'
     | '/dashboard/sales'
@@ -149,6 +160,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/error'
     | '/(private)/dashboard'
     | '/(private)/dashboard/analytics'
     | '/(private)/dashboard/products'
@@ -163,6 +175,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ErrorRoute: typeof ErrorRoute
   privateDashboardRoute: typeof privateDashboardRouteWithChildren
   privateSalesIndexRoute: typeof privateSalesIndexRoute
   AuthSignInIndexRoute: typeof AuthSignInIndexRoute
@@ -171,6 +184,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/error': {
+      id: '/error'
+      path: '/error'
+      fullPath: '/error'
+      preLoaderRoute: typeof ErrorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -274,6 +294,7 @@ const privateDashboardRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ErrorRoute: ErrorRoute,
   privateDashboardRoute: privateDashboardRouteWithChildren,
   privateSalesIndexRoute: privateSalesIndexRoute,
   AuthSignInIndexRoute: AuthSignInIndexRoute,

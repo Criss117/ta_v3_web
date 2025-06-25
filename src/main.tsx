@@ -1,11 +1,14 @@
 import "./index.css";
-import { StrictMode } from "react";
-import { useQueryClient } from "@tanstack/react-query";
+import { StrictMode, Suspense, use } from "react";
+import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { createRoot } from "react-dom/client";
 import { routeTree } from "./routeTree.gen";
 import { createRouter, RouterProvider } from "@tanstack/react-router";
 import { Integrations } from "./integrations";
 import { useTRPC } from "./integrations/trpc";
+import { checkApi } from "./lib/check-api";
+import { PageLoader } from "./components/page-loader";
+import { useHealth } from "./hooks/use.healt";
 
 // Create a new router instance
 const router = createRouter({
@@ -32,6 +35,22 @@ if (!root) {
 function App() {
 	const trpc = useTRPC();
 	const queryClient = useQueryClient();
+	const { isError, isPending } = useHealth();
+
+	if (isPending) {
+		return <PageLoader />;
+	}
+
+	if (!isPending && isError) {
+		return (
+			<div className="w-full h-dvh flex items-center justify-center">
+				<div className="flex flex-col items-center justify-center space-y-5">
+					<h1 className="text-primary text-5xl font-bold">Nimbly</h1>
+					<p>El servidor no está disponible</p>
+				</div>
+			</div>
+		);
+	}
 
 	return (
 		<RouterProvider
@@ -47,7 +66,9 @@ function App() {
 createRoot(root).render(
 	<StrictMode>
 		<Integrations>
-			<App />
+			<Suspense fallback={<PageLoader />}>
+				<App />
+			</Suspense>
 		</Integrations>
 	</StrictMode>,
 );

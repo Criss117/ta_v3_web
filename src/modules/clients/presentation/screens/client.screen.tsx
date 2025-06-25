@@ -21,12 +21,12 @@ export function ClientScreen({ clientId }: Props) {
 
 	return (
 		<div className="m-10 space-y-5">
-			<Button asChild variant="link" size="lg" className="px-0">
-				<Link to="/dashboard/clients">
+			<Link to="/dashboard/clients">
+				<Button variant="link" size="lg" className="px-0">
 					<ArrowLeftCircle />
 					Lista de clientes
-				</Link>
-			</Button>
+				</Button>
+			</Link>
 			<ClientHeaderSection client={data} />
 			<ClientDataTableSection clientId={clientId} />
 		</div>
