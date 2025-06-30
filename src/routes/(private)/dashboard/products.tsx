@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ProductsScreen } from "@/modules/products/presentation/screens/products.screen";
 import { SiteHeader } from "@/components/dashboard/header";
+import { ProductsListSection } from "@/modules/products/presentation/sections/products-list.section";
 
 export const Route = createFileRoute("/(private)/dashboard/products")({
 	component: RouteComponent,
@@ -10,7 +10,9 @@ function RouteComponent() {
 	return (
 		<>
 			<SiteHeader label="Productos" />
-			<ProductsScreen />
+			<div className="m-10">
+				<ProductsListSection />
+			</div>
 		</>
 	);
 }

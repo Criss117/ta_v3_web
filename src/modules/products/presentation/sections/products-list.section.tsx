@@ -19,7 +19,6 @@ export function ProductsListSection() {
 				</div>
 				<div>
 					<CreateProduct />
-					<button type="button">TODO: categories list</button>
 				</div>
 			</header>
 			<Suspense fallback={<ProductsTableSkeleton pageSize={10} />}>

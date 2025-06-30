@@ -1,6 +1,5 @@
-import { Edit2Icon, Trash2Icon } from "lucide-react";
+import { Trash2Icon } from "lucide-react";
 import type { ColumnDef } from "@tanstack/react-table";
-import { Link } from "@tanstack/react-router";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -151,11 +150,6 @@ export const columns: ColumnDef<TicketProduct>[] = [
 			const removeProduct = useTicketsStore((state) => state.removeProduct);
 			return (
 				<div className="space-x-2">
-					<Button asChild variant="outline" size="icon">
-						<Link to="/dashboard/products">
-							<Edit2Icon />
-						</Link>
-					</Button>
 					<Button
 						variant="destructive"
 						size="icon"

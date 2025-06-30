@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/card";
 import { Suspense } from "react";
 import { InstallmentTable } from "../components/installments-table";
+import { InstallmentsTableSkeleton } from "../components/installments-table/skeleton";
 
 interface Props {
 	clientId: string;
@@ -26,7 +27,7 @@ export function InstallmentsPlansSection({ clientId }: Props) {
 				</div>
 			</CardHeader>
 			<CardContent>
-				<Suspense fallback={<div>Loading...</div>}>
+				<Suspense fallback={<InstallmentsTableSkeleton pageSize={10} />}>
 					<InstallmentTable clientId={clientId} />
 				</Suspense>
 			</CardContent>

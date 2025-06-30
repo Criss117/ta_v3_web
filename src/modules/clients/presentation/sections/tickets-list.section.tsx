@@ -7,6 +7,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import { TicketsTableSkeleton } from "../components/tickets-table/skeleton";
 
 interface Props {
 	clientId: string;
@@ -26,7 +27,7 @@ export default function TicketsListSection({ clientId }: Props) {
 				</div>
 			</CardHeader>
 			<CardContent>
-				<Suspense fallback={<div>Loading...</div>}>
+				<Suspense fallback={<TicketsTableSkeleton pageSize={10} />}>
 					<TicketsTable clientId={clientId} />
 				</Suspense>
 			</CardContent>

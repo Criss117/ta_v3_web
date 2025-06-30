@@ -50,10 +50,7 @@ export const columns: ColumnDef<InstallmentPlanSummary>[] = [
 			);
 		},
 	},
-	{
-		accessorKey: "numberOfInstallments",
-		header: "Número de cuotas",
-	},
+
 	{
 		accessorKey: "modality",
 		header: "Modalidad",
@@ -79,6 +76,10 @@ export const columns: ColumnDef<InstallmentPlanSummary>[] = [
 		cell: ({ getValue }) => {
 			return formatCurrency(getValue() as number);
 		},
+	},
+	{
+		accessorKey: "numberOfInstallments",
+		header: "Número de cuotas",
 	},
 	{
 		id: "installmentsPaid",

@@ -21,7 +21,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 						>
 							<Link to="/dashboard">
 								<ArrowUpCircleIcon className="h-5 w-5" />
-								<span className="text-base font-semibold">Acme Inc.</span>
+								<span className="text-base font-semibold">Nimbly</span>
 							</Link>
 						</SidebarMenuButton>
 					</SidebarMenuItem>

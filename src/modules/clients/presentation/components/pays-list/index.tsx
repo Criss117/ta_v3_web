@@ -25,6 +25,7 @@ import { DialogClose } from "@radix-ui/react-dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { InfiniteScroll } from "@/components/infinite-scroll";
 import { DeletePayments } from "./delete-payments";
+import { PaysListSkeleton } from "./skeleton";
 
 interface Props {
 	clientId: string;
@@ -119,7 +120,7 @@ export function PaysList({ clientId }: Props) {
 					<DialogTitle>Lista de pagos</DialogTitle>
 					<DialogDescription />
 				</DialogHeader>
-				<Suspense>
+				<Suspense fallback={<PaysListSkeleton pageSize={5} />}>
 					<PaysListContent clientId={clientId} />
 				</Suspense>
 			</DialogContent>

@@ -36,9 +36,9 @@ export function DeleteTicket({ clientId, ticketId }: Props) {
 	return (
 		<AlertDialog open={isOpen} onOpenChange={setIsOpen}>
 			<AlertDialogTrigger asChild>
-				<Button variant="destructive">
-					Eliminar
+				<Button variant="destructive" className="w-full">
 					<Trash2Icon />
+					Eliminar
 				</Button>
 			</AlertDialogTrigger>
 			<AlertDialogContent>
@@ -79,9 +79,12 @@ export function CanontDeleteTicket() {
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
-				<Button variant="destructive" className="opacity-50 cursor-default">
-					Eliminar
+				<Button
+					variant="destructive"
+					className="opacity-50 cursor-default w-full"
+				>
 					<Trash2Icon />
+					Eliminar
 				</Button>
 			</DialogTrigger>
 			<DialogContent>

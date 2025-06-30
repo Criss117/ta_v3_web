@@ -1,10 +1,8 @@
 import {
-	FolderIcon,
 	LayoutDashboardIcon,
 	ListIcon,
 	PlusCircleIcon,
 	Users2Icon,
-	UsersIcon,
 } from "lucide-react";
 import {
 	SidebarContent as SContent,
@@ -33,16 +31,6 @@ export const dashboardLinks = {
 			title: "Clientes",
 			url: "/dashboard/clients",
 			icon: Users2Icon,
-		},
-		{
-			title: "Projects",
-			url: "#",
-			icon: FolderIcon,
-		},
-		{
-			title: "Team",
-			url: "#",
-			icon: UsersIcon,
 		},
 	],
 };

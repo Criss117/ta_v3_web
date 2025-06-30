@@ -12,6 +12,7 @@ import {
 	CanontDeleteTicket,
 	DeleteTicket,
 } from "@/modules/clients/presentation/components/delete-ticket";
+import { TicketItemsList } from "./ticket-items-list";
 
 interface Props {
 	ticket: Ticket;
@@ -25,12 +26,12 @@ export function TicketDropDown({ ticket }: Props) {
 					<MoreVerticalIcon />
 				</Button>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent>
-				<DropdownMenuGroup>
-					<DropdownMenuItem onClick={(e) => e.preventDefault()}>
-						{/* <PaymentsList installmentPayments={installmentPayments} /> */}
+			<DropdownMenuContent className="w-[150px]">
+				<DropdownMenuGroup className="space-y-2">
+					<DropdownMenuItem onClick={(e) => e.preventDefault()} asChild>
+						<TicketItemsList ticket={ticket} />
 					</DropdownMenuItem>
-					<DropdownMenuItem onClick={(e) => e.preventDefault()}>
+					<DropdownMenuItem onClick={(e) => e.preventDefault()} asChild>
 						{ticket.status !== "unpaid" || !ticket.clientId ? (
 							<CanontDeleteTicket />
 						) : (
